@@ -27,7 +27,8 @@ urlpatterns = [
     path('guides/', include('guides.urls')),
     path('reviews/', include('reviews.urls')),
     path('community/', include('community.urls')),
-    path('auth/', include('userapp')),
+    path('auth/', include('userapp.urls')),
+
 ]
 
 if settings.DEBUG:

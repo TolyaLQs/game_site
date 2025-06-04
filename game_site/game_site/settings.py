@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'guides.apps.GuidesConfig',
     'reviews.apps.ReviewsConfig',
     'news.apps.NewsConfig',
+    'userapp.apps.UserappConfig',
 ]
 
 MIDDLEWARE = [
@@ -135,5 +136,25 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Указываем кастомную модель пользователя
 AUTH_USER_MODEL = 'userapp.User'
+
+# Настройки аутентификации
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Настройки почты (для сброса пароля)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'noreply@example.com'
+EMAIL_HOST_PASSWORD = 'your-email-password'
+DEFAULT_FROM_EMAIL = 'GameSite <noreply@example.com>'
+
+# URL для перенаправления после входа/выхода
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
