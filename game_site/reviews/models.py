@@ -2,13 +2,13 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-from django.contrib.auth.models import User
+from userapp.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Review(models.Model):
     game = models.ForeignKey('games.Game', on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='review_user', on_delete=models.CASCADE)
     content = models.TextField()
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(10)]

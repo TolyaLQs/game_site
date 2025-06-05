@@ -1,21 +1,22 @@
 # userapp/urls.py
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from . import views
+import userapp.views as view
 
 name = 'userapp'
 
 urlpatterns = [
     # Регистрация
-    path('register/', views.register, name='register'),
-
+    path('register/', view.register, name='register'),
+    path('login/', view.user_login, name='login'),
+    path('logout/', view.user_logout, name='logout'),
+    path('register/', view.user_register, name='register'),
     # Вход/выход
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-
+    # path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     # Управление профилем
-    path('profile/', views.profile, name='profile'),
-    path('profile/update/', views.profile_update, name='profile_update'),
+    path('profile/', view.profile, name='profile'),
+    path('profile/update/', view.profile_update, name='profile_update'),
 
     # Смена пароля
     path('password-change/',
@@ -39,3 +40,4 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
 ]
+

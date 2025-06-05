@@ -28,7 +28,7 @@ urlpatterns = [
     path('reviews/', include('reviews.urls')),
     path('community/', include('community.urls')),
     path('auth/', include('userapp.urls')),
-
+    path('social-auth/', include('social_django.urls', namespace='social'))
 ]
 
 if settings.DEBUG:

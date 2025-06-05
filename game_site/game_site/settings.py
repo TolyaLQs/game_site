@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
     'news.apps.NewsConfig',
     'userapp.apps.UserappConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -157,4 +158,10 @@ DEFAULT_FROM_EMAIL = 'GameSite <noreply@example.com>'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.steam.SteamOpenId',
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 

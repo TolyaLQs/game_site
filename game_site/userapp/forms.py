@@ -38,19 +38,14 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class UserRegisterForm(UserCreationForm):
-    """
-    Форма для регистрации нового пользователя.
-    """
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['password1'].widget.attrs['class'] = 'form-control'
-        self.fields['password2'].widget.attrs['class'] = 'form-control'
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
     def save(self, commit=True):
         user = super(UserRegisterForm, self).save(commit=False)
@@ -61,21 +56,14 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    """
-    Форма для обновления информации о пользователе.
-    """
     class Meta:
         model = User
         fields = ('username', 'email', 'avatar', 'bio', 'is_active', 'is_staff')
 
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['avatar'].widget.attrs['class'] = 'form-control'
-        self.fields['bio'].widget.attrs['class'] = 'form-control'
-        self.fields['is_active'].widget.attrs['class'] = 'form-control'
-        self.fields['is_staff'].widget.attrs['class'] = 'form-control'
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
     def save(self, commit=True):
         user = super(UserUpdateForm, self).save(commit=False)
@@ -86,9 +74,6 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
-    """
-    Форма для обновления информации о профиле пользователя.
-    """
     class Meta:
         model = User
         fields = ('avatar', 'bio')
@@ -103,3 +88,4 @@ class ProfileUpdateForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
